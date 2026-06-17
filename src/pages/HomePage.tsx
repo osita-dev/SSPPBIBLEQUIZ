@@ -35,19 +35,19 @@ export default function HomePage() {
         <div className="text-center space-y-2">
           <p className="font-nunito text-royal/60 text-sm font-bold uppercase tracking-widest">Welcome to</p>
           <h1 className="font-fredoka text-4xl text-royal leading-tight">
-            SS Peter & Paul
+            SS Peter & Paul Catholic Church Shomolu
           </h1>
           <h2 className="font-fredoka text-2xl text-gold-deep">
             Bible Quiz Challenge
           </h2>
           <p className="font-nunito text-royal/60 text-sm mt-3 leading-relaxed">
             Spin the wheel. Answer the question.<br />
-            Win up to <span className="text-gold-deep font-extrabold">₦8,000!</span>
+          
           </p>
         </div>
 
         {/* Prize info */}
-        <div className="bg-white rounded-2xl shadow-card border border-royal/10 p-4 w-full grid grid-cols-2 gap-3 text-center">
+        {/* <div className="bg-white rounded-2xl shadow-card border border-royal/10 p-4 w-full grid grid-cols-2 gap-3 text-center">
           <div>
             <p className="font-fredoka text-2xl text-gold">₦500</p>
             <p className="text-xs text-royal/50 font-bold uppercase">per correct answer</p>
@@ -56,7 +56,7 @@ export default function HomePage() {
             <p className="font-fredoka text-2xl text-royal">₦8,000</p>
             <p className="text-xs text-royal/50 font-bold uppercase">jackpot prize</p>
           </div>
-        </div>
+        </div> */}
 
         {/* CTA */}
         <motion.button
@@ -68,10 +68,6 @@ export default function HomePage() {
           <Play className="w-6 h-6 fill-current" />
           Start Playing!
         </motion.button>
-
-        <p className="font-nunito text-royal/40 text-xs text-center">
-          Questions repeat randomly — play forever!
-        </p>
       </motion.div>
     </div>
   );

@@ -39,7 +39,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
   spinDegrees: 1800,
 
   startGame: () => {
-    set({ phase: "spinning", spinDegrees: 1800 + Math.floor(Math.random() * 1440) });
+    set({ phase: "idle" });
   },
 
   triggerSpin: () => {
@@ -74,16 +74,15 @@ export const useQuizStore = create<QuizState>((set, get) => ({
       phase: "feedback",
     });
 
-    // auto-advance to next spin after feedback
+    // return to idle after feedback — user must tap spin again
     setTimeout(() => {
-      get().triggerSpin();
+      set({ phase: "idle", currentQuestion: null });
     }, 2000);
   },
 
   skipQuestion: () => {
     const { totalSkipped } = get();
-    set({ totalSkipped: totalSkipped + 1 });
-    get().triggerSpin();
+    set({ totalSkipped: totalSkipped + 1, phase: "idle", currentQuestion: null });
   },
 
   resetGame: () => {
