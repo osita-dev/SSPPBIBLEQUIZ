@@ -5,17 +5,15 @@ import SpinWheel from "../components/SpinWheel";
 import QuestionCard from "../components/QuestionCard";
 import ScoreBoard from "../components/ScoreBoard";
 import FeedbackOverlay from "../components/FeedbackOverlay";
-import { RotateCcw, RefreshCw } from "lucide-react";
+import { RotateCcw } from "lucide-react";
 
 export default function QuizPage() {
-  const { phase, triggerSpin, resetGame } = useQuizStore();
+  const { phase, resetGame } = useQuizStore();
   useSpinLogic();
 
-  const isIdle = phase === "idle";
   const isSpinning = phase === "spinning";
-  const showWheel = isIdle || isSpinning;
+  const showWheel = phase === "idle" || isSpinning;
   const showQuestion = phase === "question" || phase === "feedback";
-  const showSpinButton = isIdle || isSpinning; // hidden during question/feedback
 
   return (
     <div className="min-h-screen bg-cream flex flex-col relative overflow-hidden">
@@ -45,9 +43,9 @@ export default function QuizPage() {
       </div>
 
       {/* Main content area */}
-      <div className="flex-1 flex flex-col items-center justify-start px-4 pb-8">
+      <div className="flex-1 flex flex-col items-center justify-center px-4 pb-8">
         <AnimatePresence mode="wait">
-          {/* WHEEL — shown when idle (waiting for tap) or actively spinning */}
+          {/* WHEEL — tap directly on it to spin (idle) or watch it spin */}
           {showWheel && (
             <motion.div
               key="wheel"
@@ -59,7 +57,7 @@ export default function QuizPage() {
             >
               <SpinWheel />
               <p className="font-fredoka text-royal/60 text-lg animate-pulse">
-                {isSpinning ? "Spinning..." : "Tap below to spin!"}
+                {isSpinning ? "Spinning..." : "Tap the wheel to spin!"}
               </p>
             </motion.div>
           )}
@@ -78,26 +76,6 @@ export default function QuizPage() {
           )}
         </AnimatePresence>
       </div>
-
-      {/* Bottom spin trigger — only when idle (not while spinning, answering, or in feedback) */}
-      {showSpinButton && (
-        <div className="px-4 pb-6">
-          <motion.button
-            onClick={triggerSpin}
-            disabled={isSpinning}
-            className={`w-full max-w-lg mx-auto flex items-center justify-center gap-2 rounded-2xl py-4 font-fredoka text-xl shadow-gold transition-all
-              ${isSpinning ? "bg-royal/10 text-royal/30 cursor-not-allowed" : "bg-gold hover:bg-gold-deep text-royal ripple-btn relative"}
-            `}
-            whileTap={!isSpinning ? { scale: 0.96 } : {}}
-            style={{ display: "block", marginLeft: "auto", marginRight: "auto" }}
-          >
-            <span className="flex items-center justify-center gap-2">
-              <RefreshCw className={`w-5 h-5 ${isSpinning ? "animate-spin" : ""}`} />
-              {isSpinning ? "Spinning..." : "Spin the Wheel!"}
-            </span>
-          </motion.button>
-        </div>
-      )}
 
       <FeedbackOverlay />
     </div>

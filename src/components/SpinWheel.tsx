@@ -11,8 +11,12 @@ const COLORS = [
 const LABELS = ["✝", "?", "★", "✝", "?", "★", "✝", "?"];
 
 export default function SpinWheel() {
-  const { phase, spinDegrees } = useQuizStore();
+  const { phase, spinDegrees, triggerSpin } = useQuizStore();
   const controls = useAnimation();
+
+  const isIdle = phase === "idle";
+  const isSpinning = phase === "spinning";
+  const canTap = isIdle; // only tappable while waiting, not mid-spin
 
   useEffect(() => {
     if (phase === "spinning") {
@@ -26,6 +30,10 @@ export default function SpinWheel() {
       });
     }
   }, [phase, spinDegrees, controls]);
+
+  const handleTap = () => {
+    if (canTap) triggerSpin();
+  };
 
   const r = 120;
   const cx = 140;
@@ -49,8 +57,22 @@ export default function SpinWheel() {
       {/* Pointer */}
       <div className="w-0 h-0 border-l-[14px] border-r-[14px] border-t-[28px] border-l-transparent border-r-transparent border-t-gold-deep drop-shadow-lg z-10" />
 
-      {/* Wheel */}
-      <div className="relative">
+      {/* Wheel — tappable when idle */}
+      <motion.div
+        className="relative"
+        onClick={handleTap}
+        role="button"
+        tabIndex={canTap ? 0 : -1}
+        aria-label="Tap to spin the wheel"
+        aria-disabled={!canTap}
+        onKeyDown={(e) => {
+          if (canTap && (e.key === "Enter" || e.key === " ")) handleTap();
+        }}
+        style={{ cursor: canTap ? "pointer" : "default" }}
+        whileTap={canTap ? { scale: 0.94 } : {}}
+        animate={canTap ? { scale: [1, 1.04, 1] } : { scale: 1 }}
+        transition={canTap ? { duration: 1.6, repeat: Infinity, ease: "easeInOut" } : {}}
+      >
         <motion.svg
           width={280}
           height={280}
@@ -92,10 +114,15 @@ export default function SpinWheel() {
         </motion.svg>
 
         {/* Glow ring when spinning */}
-        {phase === "spinning" && (
+        {isSpinning && (
           <div className="absolute inset-0 rounded-full pointer-events-none animate-ping opacity-20 bg-gold" />
         )}
-      </div>
+
+        {/* Soft tap-hint glow when idle */}
+        {canTap && (
+          <div className="absolute inset-0 rounded-full pointer-events-none opacity-25 bg-gold blur-xl -z-10" />
+        )}
+      </motion.div>
     </div>
   );
 }
