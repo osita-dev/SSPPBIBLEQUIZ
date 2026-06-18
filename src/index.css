@@ -5,47 +5,47 @@
 
 @layer base {
   :root {
-    --background: 38 60% 97%;
-    --foreground: 260 40% 14%;
+    --background: 36 55% 96%;
+    --foreground: 22 45% 16%;
 
     --card: 0 0% 100%;
-    --card-foreground: 260 40% 14%;
+    --card-foreground: 22 45% 16%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 260 40% 14%;
+    --popover-foreground: 22 45% 16%;
 
-    --primary: 44 96% 50%;
-    --primary-foreground: 260 40% 14%;
+    --primary: 38 68% 52%;
+    --primary-foreground: 28 45% 14%;
 
-    --secondary: 262 52% 28%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 22 48% 28%;
+    --secondary-foreground: 38 60% 92%;
 
-    --muted: 38 30% 92%;
-    --muted-foreground: 260 20% 45%;
+    --muted: 32 30% 92%;
+    --muted-foreground: 22 25% 40%;
 
-    --accent: 14 90% 55%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 14 55% 38%;
+    --accent-foreground: 38 60% 95%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 38 25% 86%;
-    --input: 38 25% 86%;
-    --ring: 44 96% 50%;
+    --border: 32 25% 84%;
+    --input: 32 25% 84%;
+    --ring: 38 68% 52%;
 
     --radius: 1rem;
 
-    /* Church-quiz custom tokens */
-    --gold: #F5A623;
-    --gold-light: #FDE68A;
-    --gold-deep: #D97706;
-    --royal: #3B1F6E;
-    --royal-mid: #5B3FA6;
-    --royal-light: #7C5CBF;
-    --cream: #FDF8EE;
+    /* SS Peter & Paul 70th Anniversary tokens — bronze & antique gold */
+    --gold: #C9A368;
+    --gold-light: #E8D5A8;
+    --gold-deep: #8B6914;
+    --royal: #5C3318;
+    --royal-mid: #7A4520;
+    --royal-light: #9C6332;
+    --cream: #FBF6EC;
     --success: #22C55E;
     --danger: #EF4444;
-    --spin-glow: 0 0 40px rgba(245,166,35,0.6), 0 0 80px rgba(245,166,35,0.25);
+    --spin-glow: 0 0 40px rgba(201,163,104,0.6), 0 0 80px rgba(201,163,104,0.25);
   }
 }
 
@@ -98,8 +98,8 @@
 
 /* ---- Glow pulse (score badge) ---- */
 @keyframes glowPulse {
-  0%,100% { box-shadow: 0 0 12px rgba(245,166,35,0.4); }
-  50%     { box-shadow: 0 0 28px rgba(245,166,35,0.75); }
+  0%,100% { box-shadow: 0 0 12px rgba(201,163,104,0.4); }
+  50%     { box-shadow: 0 0 28px rgba(201,163,104,0.75); }
 }
 .glow-pulse { animation: glowPulse 2s ease-in-out infinite; }
 

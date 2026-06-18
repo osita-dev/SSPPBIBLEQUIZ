@@ -6,6 +6,7 @@ import QuestionCard from "../components/QuestionCard";
 import ScoreBoard from "../components/ScoreBoard";
 import FeedbackOverlay from "../components/FeedbackOverlay";
 import { RotateCcw } from "lucide-react";
+import parishLogo from "../assets/parish-logo.jpeg";
 
 export default function QuizPage() {
   const { phase, resetGame } = useQuizStore();
@@ -20,12 +21,12 @@ export default function QuizPage() {
       {/* Top bar */}
       <div className="flex items-center justify-between px-4 pt-5 pb-2">
         <div className="flex items-center gap-2">
-          <div className="bg-royal rounded-full w-9 h-9 flex items-center justify-center">
-            <span className="text-gold text-lg">✝</span>
+          <div className=" w-12 h-12 overflow-hidden border-2 border-gold shrink-0 bg-white">
+            <img src={parishLogo} alt="SS Peter & Paul emblem" className="w-full h-full object-cover" />
           </div>
           <div>
             <p className="font-fredoka text-royal text-base leading-none">SS Peter & Paul Catholic Church Shomolu</p>
-            <p className="text-[10px] text-royal/50 font-bold uppercase tracking-wide">Bible Quiz</p>
+            <p className="text-[10px] text-royal/50 font-bold uppercase tracking-wide">Quiz Challenge</p>
           </div>
         </div>
         <button

@@ -2,11 +2,12 @@ import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
 import { useQuizStore } from "../store/useQuizStore";
 import { SPIN_DURATION_MS } from "../hooks/useSpinLogic";
+import parishLogo from "../assets/parish-logo.jpeg";
 
 const SEGMENTS = 8;
 const COLORS = [
-  "#F5A623", "#3B1F6E", "#D97706", "#5B3FA6",
-  "#F5A623", "#3B1F6E", "#D97706", "#7C5CBF",
+  "#C9A368", "#5C3318", "#8B6914", "#7A4520",
+  "#C9A368", "#5C3318", "#8B6914", "#9C6332",
 ];
 const LABELS = ["✝", "?", "★", "✝", "?", "★", "✝", "?"];
 
@@ -53,7 +54,15 @@ export default function SpinWheel() {
   };
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-4 relative">
+      {/* Watermark logo behind the wheel */}
+      <img
+        src={parishLogo}
+        alt=""
+        aria-hidden="true"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] object-contain opacity-[0.07] pointer-events-none select-none -z-20"
+      />
+
       {/* Pointer */}
       <div className="w-0 h-0 border-l-[14px] border-r-[14px] border-t-[28px] border-l-transparent border-r-transparent border-t-gold-deep drop-shadow-lg z-10" />
 
@@ -79,10 +88,10 @@ export default function SpinWheel() {
           viewBox="0 0 280 280"
           animate={controls}
           style={{ originX: "50%", originY: "50%" }}
-          className="drop-shadow-[0_8px_32px_rgba(59,31,110,0.35)]"
+          className="drop-shadow-[0_8px_32px_rgba(92,51,24,0.35)]"
         >
           {/* Outer ring */}
-          <circle cx={cx} cy={cy} r={r + 10} fill="#3B1F6E" />
+          <circle cx={cx} cy={cy} r={r + 10} fill="#5C3318" />
 
           {/* Segments */}
           {COLORS.map((color, i) => {
@@ -92,13 +101,13 @@ export default function SpinWheel() {
             const lp = polarToCartesian(mid, r * 0.65);
             return (
               <g key={i}>
-                <path d={describeSlice(start, end)} fill={color} stroke="#FDF8EE" strokeWidth={2} />
+                <path d={describeSlice(start, end)} fill={color} stroke="#FBF6EC" strokeWidth={2} />
                 <text
                   x={lp.x} y={lp.y}
                   textAnchor="middle"
                   dominantBaseline="middle"
                   fontSize={22}
-                  fill="#FDF8EE"
+                  fill="#FBF6EC"
                   fontFamily="serif"
                   style={{ userSelect: "none" }}
                 >
@@ -108,9 +117,21 @@ export default function SpinWheel() {
             );
           })}
 
-          {/* Center hub */}
-          <circle cx={cx} cy={cy} r={22} fill="#F5A623" stroke="#FDF8EE" strokeWidth={4} />
-          <text x={cx} y={cy} textAnchor="middle" dominantBaseline="middle" fontSize={16} fill="#3B1F6E" fontWeight="bold">✝</text>
+          {/* Center hub with logo */}
+          <defs>
+            <clipPath id="hubClip">
+              <circle cx={cx} cy={cy} r={22} />
+            </clipPath>
+          </defs>
+          <circle cx={cx} cy={cy} r={24} fill="#FBF6EC" />
+          <image
+            href={parishLogo}
+            x={cx - 22} y={cy - 22}
+            width={44} height={44}
+            clipPath="url(#hubClip)"
+            preserveAspectRatio="xMidYMid slice"
+          />
+          <circle cx={cx} cy={cy} r={22} fill="none" stroke="#C9A368" strokeWidth={3} />
         </motion.svg>
 
         {/* Glow ring when spinning */}
