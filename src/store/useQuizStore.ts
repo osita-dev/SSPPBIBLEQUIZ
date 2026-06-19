@@ -19,6 +19,7 @@ interface QuizState {
   triggerSpin: () => void;
   revealQuestion: () => void;
   selectAnswer: (index: number) => void;
+  timeExpired: () => void;
   skipQuestion: () => void;
   resetGame: () => void;
 }
@@ -75,6 +76,24 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     });
 
     // return to idle after feedback — user must tap spin again
+    setTimeout(() => {
+      set({ phase: "idle", currentQuestion: null });
+    }, 2000);
+  },
+
+  // Timer hit zero — auto-select the correct answer and show it
+  timeExpired: () => {
+    const { currentQuestion, totalAnswered } = get();
+    if (!currentQuestion || get().answerState !== "idle") return;
+
+    set({
+      selectedOption: currentQuestion.correct,
+      answerState: "correct",        // still a loss — time ran out
+      totalAnswered: totalAnswered + 1,
+      phase: "feedback",
+    });
+
+    // return to idle after showing the correct answer briefly
     setTimeout(() => {
       set({ phase: "idle", currentQuestion: null });
     }, 2000);
