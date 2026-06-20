@@ -1,24 +1,65 @@
 {
+  "id": "/",
   "name": "SS Peter & Paul Bible Quiz",
   "short_name": "BibleQuiz",
   "description": "SS Peter & Paul Catholic Church Shomolu — 70th Anniversary Bible Quiz Challenge",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#FBF6EC",
+  "orientation": "portrait-primary",
   "theme_color": "#5C3318",
+  "background_color": "#FBF6EC",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["education", "entertainment"],
+  "prefer_related_applications": false,
   "icons": [
     {
-      "src": "/assets/parish-logo.png",
+      "src": "assets/parish-logo.jpeg",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "/assets/parish-logo.png",
+      "src": "assets/parish-logo.jpeg",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "assets/parish-logo.jpeg",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/parish-logo.jpeg",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/parish-logo.jpeg",
+      "sizes": "512x512",
+      "type": "image/png",
+      "description": "SS Peter & Paul Bible Quiz"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Start Quiz",
+      "short_name": "Play",
+      "description": "Jump straight into the Bible Quiz",
+      "url": "/",
+      "icons": [
+        {
+          "src": "assets/parish-logo.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     }
   ]
 }
