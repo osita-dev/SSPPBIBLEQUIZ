@@ -2,56 +2,316 @@ import type { Question } from "../types/quiz";
 
 export const questions: Question[] = [
   // Bible Knowledge
-  { id: 1, question: "Who was the first Pope of the Catholic Church?", options: ["St. Paul", "St. Peter", "St. James", "St. John"], correct: 1, category: "Church History" },
-  { id: 2, question: "How many books are in the Catholic Bible?", options: ["66", "72", "73", "76"], correct: 2, category: "Scripture" },
-  { id: 3, question: "What is the first book of the Bible?", options: ["Exodus", "Psalms", "Genesis", "Matthew"], correct: 2, category: "Scripture" },
-  { id: 4, question: "In which city was Jesus born?", options: ["Nazareth", "Jerusalem", "Bethlehem", "Jericho"], correct: 2, category: "Scripture" },
-  { id: 5, question: "How many apostles did Jesus choose?", options: ["10", "11", "12", "13"], correct: 2, category: "Scripture" },
-  { id: 6, question: "Which saint is the patron of Nigeria?", options: ["St. Patrick", "St. Augustine", "St. Theresa", "St. Joseph"], correct: 1, category: "Saints" },
-  { id: 7, question: "What are the two main sacraments instituted by Christ?", options: ["Baptism and Eucharist", "Penance and Anointing", "Marriage and Orders", "Baptism and Penance"], correct: 0, category: "Sacraments" },
-  { id: 8, question: "Which archangel announced to Mary she would bear the Son of God?", options: ["Michael", "Raphael", "Gabriel", "Uriel"], correct: 2, category: "Scripture" },
-  { id: 9, question: "How many days did Jesus fast in the desert?", options: ["20", "30", "40", "50"], correct: 2, category: "Scripture" },
-  { id: 10, question: "What is the holiest week in the Catholic calendar?", options: ["Advent", "Lent", "Holy Week", "Easter Week"], correct: 2, category: "Liturgy" },
-  { id: 11, question: "Who wrote the majority of the New Testament letters?", options: ["Peter", "John", "Paul", "James"], correct: 2, category: "Scripture" },
-  { id: 12, question: "What is the central sacrament of the Catholic Mass?", options: ["Baptism", "Eucharist", "Confession", "Confirmation"], correct: 1, category: "Sacraments" },
-  { id: 13, question: "Whose tomb is believed to be under St. Peter's Basilica in Rome?", options: ["Jesus", "St. Paul", "St. Peter", "Constantine"], correct: 2, category: "Church History" },
-  { id: 14, question: "What color vestments does a priest wear during Ordinary Time?", options: ["Red", "Purple", "White", "Green"], correct: 3, category: "Liturgy" },
-  { id: 15, question: "What prayer do Catholics say using a rosary?", options: ["Our Father only", "Hail Mary, Our Father & Glory Be", "The Apostles Creed only", "Divine Mercy Chaplet"], correct: 1, category: "Prayer" },
-  { id: 16, question: "In what language was the original New Testament written?", options: ["Latin", "Hebrew", "Aramaic", "Greek"], correct: 3, category: "Scripture" },
-  { id: 17, question: "Which council defined the dogma of Papal Infallibility?", options: ["Council of Trent", "Vatican I", "Vatican II", "Council of Nicaea"], correct: 1, category: "Church History" },
-  { id: 18, question: "What is the Immaculate Conception?", options: ["Jesus born of a virgin", "Mary born without original sin", "Mary's assumption into heaven", "The Holy Spirit descending"], correct: 1, category: "Doctrine" },
-  { id: 19, question: "Who was SS Peter and Paul Parish named after?", options: ["Two prophets", "Two evangelists", "Two apostles and martyrs", "Two popes"], correct: 2, category: "Church History" },
-  { id: 20, question: "What does 'Amen' mean?", options: ["Praise God", "So be it / Truly", "Thank you Lord", "We believe"], correct: 1, category: "Liturgy" },
-  { id: 21, question: "How many Gospels are in the New Testament?", options: ["3", "4", "5", "6"], correct: 1, category: "Scripture" },
-  { id: 22, question: "Which sacrament forgives sins committed after Baptism?", options: ["Eucharist", "Confirmation", "Penance/Reconciliation", "Anointing of the Sick"], correct: 2, category: "Sacraments" },
-  { id: 23, question: "What is the liturgical season before Christmas?", options: ["Lent", "Advent", "Pentecost", "Epiphany"], correct: 1, category: "Liturgy" },
-  { id: 24, question: "Who was swallowed by a big fish in the Bible?", options: ["Elijah", "Jonah", "Moses", "Isaiah"], correct: 1, category: "Scripture" },
-  { id: 25, question: "What is the visible head of the Catholic Church on earth?", options: ["A Cardinal", "The Pope", "The Bishop of Rome only ceremonially", "The Archbishop of Canterbury"], correct: 1, category: "Doctrine" },
-  { id: 26, question: "On what day did Jesus rise from the dead?", options: ["Friday", "Saturday", "Sunday", "Monday"], correct: 2, category: "Scripture" },
-  { id: 27, question: "What feast celebrates the coming of the Holy Spirit on the Apostles?", options: ["Ascension", "Epiphany", "Pentecost", "Trinity Sunday"], correct: 2, category: "Liturgy" },
-  { id: 28, question: "Which apostle denied Jesus three times?", options: ["Judas", "Thomas", "Peter", "John"], correct: 2, category: "Scripture" },
-  { id: 29, question: "How many commandments did God give Moses?", options: ["5", "7", "10", "12"], correct: 2, category: "Scripture" },
-  { id: 30, question: "What is the first prayer a Catholic child typically learns?", options: ["The Rosary", "The Our Father", "The Hail Mary", "The Nicene Creed"], correct: 1, category: "Prayer" },
-  { id: 31, question: "Who was the mother of Jesus?", options: ["Martha", "Mary Magdalene", "Mary of Nazareth", "Elizabeth"], correct: 2, category: "Scripture" },
-  { id: 32, question: "What does 'Catholic' mean?", options: ["Holy", "Universal", "Apostolic", "Roman"], correct: 1, category: "Doctrine" },
-  { id: 33, question: "Which apostle is known as the 'Beloved Disciple'?", options: ["Peter", "Matthew", "John", "Philip"], correct: 2, category: "Scripture" },
-  { id: 34, question: "In the Our Father, we pray 'Thy kingdom ___'?", options: ["rise", "come", "reign", "shine"], correct: 1, category: "Prayer" },
-  { id: 35, question: "What was St. Paul's name before his conversion?", options: ["Simon", "Saul", "Barnabas", "Silas"], correct: 1, category: "Scripture" },
-  { id: 36, question: "Which river was Jesus baptized in?", options: ["Nile", "Euphrates", "Tigris", "Jordan"], correct: 3, category: "Scripture" },
-  { id: 37, question: "How many sacraments does the Catholic Church have?", options: ["5", "6", "7", "8"], correct: 2, category: "Sacraments" },
-  { id: 38, question: "What color is used during Lent and Advent (penitential seasons)?", options: ["Red", "Purple/Violet", "White", "Black"], correct: 1, category: "Liturgy" },
-  { id: 39, question: "Who betrayed Jesus for thirty pieces of silver?", options: ["Peter", "Thomas", "Judas Iscariot", "Barabbas"], correct: 2, category: "Scripture" },
-  { id: 40, question: "Where did Jesus perform his first miracle?", options: ["Jerusalem", "Nazareth", "Cana in Galilee", "Bethlehem"], correct: 2, category: "Scripture" },
-  { id: 41, question: "What is the name of the prayer Jesus taught his disciples?", options: ["The Hail Mary", "The Our Father", "The Glory Be", "The Nicene Creed"], correct: 1, category: "Prayer" },
-  { id: 42, question: "Which book of the Bible comes first in the New Testament?", options: ["Mark", "Luke", "John", "Matthew"], correct: 3, category: "Scripture" },
-  { id: 43, question: "What does the 'P' in RIP (R.I.P.) stand for?", options: ["Pray", "Peace", "Perpetual", "Peaceful"], correct: 1, category: "Church History" },
-  { id: 44, question: "What is the name of the mountain where Moses received the Ten Commandments?", options: ["Mount Zion", "Mount Sinai", "Mount Carmel", "Mount Olivet"], correct: 1, category: "Scripture" },
-  { id: 45, question: "Who is considered the father of all nations in the Bible?", options: ["Moses", "Isaac", "Abraham", "Jacob"], correct: 2, category: "Scripture" },
-  { id: 46, question: "Which saint had a vision of Jesus showing His Sacred Heart?", options: ["St. Faustina", "St. Margaret Mary Alacoque", "St. Teresa of Avila", "St. Catherine"], correct: 1, category: "Saints" },
-  { id: 47, question: "What is the feast celebrating Mary being taken body and soul to heaven?", options: ["Immaculate Conception", "Annunciation", "Assumption of Mary", "Nativity of Mary"], correct: 2, category: "Doctrine" },
-  { id: 48, question: "Which disciple walked on water with Jesus?", options: ["John", "James", "Peter", "Andrew"], correct: 2, category: "Scripture" },
-  { id: 49, question: "What do we call the bread and wine after consecration at Mass?", options: ["Holy symbols", "Sacred food", "The Body and Blood of Christ", "Blessed offerings"], correct: 2, category: "Sacraments" },
-  { id: 50, question: "How many days after His death did Jesus appear to His disciples?", options: ["On the 1st day", "On the 3rd day", "On the 7th day", "On the 40th day"], correct: 1, category: "Scripture" },
+ 
+  {
+    id: 1,
+    question: "Who was the first Pope of the Catholic Church?",
+    options: ["St. Paul", "St. Peter", "St. James", "St. John"],
+    correct: 1,
+    category: "Church History"
+  },
+  {
+    id: 2,
+    question: "How many books are in the Catholic Bible?",
+    options: ["66", "72", "73", "76"],
+    correct: 2,
+    category: "Scripture"
+  },
+  {
+    id: 3,
+    question: "What is the first book of the Bible?",
+    options: ["Exodus", "Psalms", "Genesis", "Matthew"],
+    correct: 2,
+    category: "Scripture"
+  },
+  {
+    id: 4,
+    question: "In which city was Jesus born?",
+    options: ["Nazareth", "Jerusalem", "Bethlehem", "Jericho"],
+    correct: 2,
+    category: "Scripture"
+  },
+  {
+    id: 5,
+    question: "How many apostles did Jesus choose?",
+    options: ["10", "11", "12", "13"],
+    correct: 2,
+    category: "Scripture"
+  },
+  {
+    id: 6,
+    question: "Which two sacraments were directly instituted by Christ during His earthly ministry?",
+    options: [
+      "Baptism and Eucharist",
+      "Penance and Anointing",
+      "Marriage and Orders",
+      "Baptism and Penance"
+    ],
+    correct: 0,
+    category: "Sacraments"
+  },
+  {
+    id: 7,
+    question: "Which archangel announced to Mary she would bear the Son of God?",
+    options: ["Michael", "Raphael", "Gabriel", "Uriel"],
+    correct: 2,
+    category: "Scripture"
+  },
+  {
+    id: 8,
+    question: "How many days did Jesus fast in the desert?",
+    options: ["20", "30", "40", "50"],
+    correct: 2,
+    category: "Scripture"
+  },
+  {
+    id: 9,
+    question: "What is the holiest week in the Catholic calendar?",
+    options: ["Advent", "Lent", "Holy Week", "Easter Week"],
+    correct: 2,
+    category: "Liturgy"
+  },
+  {
+    id: 10,
+    question: "Who wrote most of the New Testament letters?",
+    options: ["Peter", "John", "Paul", "James"],
+    correct: 2,
+    category: "Scripture"
+  },
+  {
+    id: 11,
+    question: "What is the central sacrament celebrated at Mass?",
+    options: ["Baptism", "Eucharist", "Confession", "Confirmation"],
+    correct: 1,
+    category: "Sacraments"
+  },
+  {
+    id: 12,
+    question: "Whose tomb is believed to be beneath St. Peter’s Basilica?",
+    options: ["Jesus", "St. Paul", "St. Peter", "Constantine"],
+    correct: 2,
+    category: "Church History"
+  },
+  {
+    id: 13,
+    question: "What liturgical color is used during Ordinary Time?",
+    options: ["Red", "Purple", "White", "Green"],
+    correct: 3,
+    category: "Liturgy"
+  },
+  {
+    id: 14,
+    question: "Which prayer is commonly prayed with the Rosary?",
+    options: [
+      "Our Father only",
+      "Hail Mary, Our Father and Glory Be",
+      "Apostles Creed only",
+      "Divine Mercy Chaplet"
+    ],
+    correct: 1,
+    category: "Prayer"
+  },
+  {
+    id: 15,
+    question: "Which Council defined Papal Infallibility?",
+    options: [
+      "Council of Trent",
+      "Vatican I",
+      "Vatican II",
+      "Council of Nicaea"
+    ],
+    correct: 1,
+    category: "Church History"
+  },
+  {
+    id: 16,
+    question: "What is the Immaculate Conception?",
+    options: [
+      "Jesus born of a virgin",
+      "Mary conceived without Original Sin",
+      "Mary's Assumption",
+      "Pentecost"
+    ],
+    correct: 1,
+    category: "Doctrine"
+  },
+  {
+    id: 17,
+    question: "What does 'Amen' mean?",
+    options: ["Praise God", "So be it", "Thank You Lord", "We believe"],
+    correct: 1,
+    category: "Prayer"
+  },
+  {
+    id: 18,
+    question: "How many Gospels are in the New Testament?",
+    options: ["3", "4", "5", "6"],
+    correct: 1,
+    category: "Scripture"
+  },
+  {
+    id: 19,
+    question: "Who is the patron saint of students?",
+    options: [
+      "St. Augustine",
+      "St. Thomas Aquinas",
+      "St. Peter",
+      "St. Paul"
+    ],
+    correct: 1,
+    category: "Saints"
+  },
+  {
+    id: 20,
+    question: "Who is the patron saint of missionaries?",
+    options: [
+      "St. Francis Xavier",
+      "St. Patrick",
+      "St. Luke",
+      "St. Mark"
+    ],
+    correct: 0,
+    category: "Saints"
+  },
+  {
+    id: 21,
+    question: "Who is the patron saint of lost things?",
+    options: [
+      "St. Anthony of Padua",
+      "St. Jude",
+      "St. Joseph",
+      "St. Stephen"
+    ],
+    correct: 0,
+    category: "Saints"
+  },
+  {
+    id: 22,
+    question: "Who is the patron saint of workers?",
+    options: ["St. Peter", "St. Joseph", "St. Paul", "St. Matthew"],
+    correct: 1,
+    category: "Saints"
+  },
+  {
+    id: 23,
+    question: "Who is the patron saint of travelers?",
+    options: [
+      "St. Christopher",
+      "St. Patrick",
+      "St. Francis",
+      "St. Dominic"
+    ],
+    correct: 0,
+    category: "Saints"
+  },
+  {
+    id: 24,
+    question: "Who is the patron saint of musicians?",
+    options: [
+      "St. Cecilia",
+      "St. Monica",
+      "St. Agnes",
+      "St. Lucy"
+    ],
+    correct: 0,
+    category: "Saints"
+  },
+  {
+    id: 25,
+    question: "Which saint replaced Judas Iscariot among the Apostles?",
+    options: ["Barnabas", "Matthias", "Timothy", "Silas"],
+    correct: 1,
+    category: "Scripture"
+  },
+  {
+    id: 26,
+    question: "Counting from St. Peter as the first Pope, what number is Pope Leo XIV?",
+    options: ["265th", "266th", "267th", "268th"],
+    correct: 2,
+    category: "Church History"
+  },
+  {
+    id: 27,
+    question: "What is the birth (real) name of Pope Leo XIV?",
+    options: [
+      "Robert Anthony Prevost",
+      "Robert Francis Prevost",
+      "Francis Robert Prevost",
+      "John Robert Prevost"
+    ],
+    correct: 1,
+    category: "Church History"
+  },
+  {
+    id: 28,
+    question: "Pope Leo XIV became Pope in which year?",
+    options: ["2023", "2024", "2025", "2026"],
+    correct: 2,
+    category: "Church History"
+  },
+  {
+    id: 29,
+    question: "Who is recognized as the founder of the Catholic Church?",
+    options: [
+      "St. Peter",
+      "Emperor Constantine",
+      "Jesus Christ",
+      "Pope Leo XIV"
+    ],
+    correct: 2,
+    category: "Doctrine"
+  },
+  {
+    id: 30,
+    question: "Who was appointed by Jesus as the first visible leader of the Church?",
+    options: [
+      "St. John",
+      "St. Paul",
+      "St. Peter",
+      "St. James"
+    ],
+    correct: 2,
+    category: "Church History"
+  },
+  {
+    id: 31,
+    question: "In what year was Archbishop Alfred Adewale Martins ordained a priest?",
+    options: ["1982", "1983", "1984", "1997"],
+    correct: 1,
+    category: "Local Church"
+  },
+  {
+    id: 32,
+    question: "Before becoming Archbishop of Lagos, Archbishop Alfred Adewale Martins served as:",
+    options: [
+      "Bishop of Ibadan",
+      "Bishop of Abeokuta",
+      "Bishop of Ijebu-Ode",
+      "Auxiliary Bishop of Abuja"
+    ],
+    correct: 1,
+    category: "Local Church"
+  },
+  {
+    id: 33,
+    question: "Which Pope appointed Archbishop Alfred Adewale Martins as Archbishop of Lagos?",
+    options: [
+      "Pope Francis",
+      "Pope Benedict XVI",
+      "Pope John Paul II",
+      "Pope Leo XIV"
+    ],
+    correct: 1,
+    category: "Local Church"
+  },
+  {
+    id: 34,
+    question: "Pope Leo XIV became the first Pope from which country?",
+    options: ["Peru", "Italy", "United States", "Spain"],
+    correct: 2,
+    category: "Church History"
+  }
+
 ];
 
 export const getRandomQuestion = (excludeIds: number[] = []): Question => {
