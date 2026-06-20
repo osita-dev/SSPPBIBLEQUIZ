@@ -8,14 +8,13 @@ import { useEffect } from "react";
 import { useQuizStore } from "./store/useQuizStore";
 import HomePage from "./pages/HomePage";
 import QuizPage from "./pages/QuizPage";
+import InstallButton from "./components/InstallButton";
 
 const queryClient = new QueryClient();
 
 const AppRouter = () => {
   const { phase, skipQuestion } = useQuizStore();
 
-  // If app rehydrates from localStorage mid-feedback, the 2s setTimeout
-  // won't resume — snap to idle so the screen isn't frozen
   useEffect(() => {
     if (phase === "feedback") {
       skipQuestion();
@@ -36,6 +35,8 @@ const App = () => (
           <Route path="/*" element={<AppRouter />} />
         </Routes>
       </BrowserRouter>
+      {/* Fixed install button — floats above all pages */}
+      <InstallButton />
     </TooltipProvider>
   </QueryClientProvider>
 );

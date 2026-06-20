@@ -1,0 +1,24 @@
+{
+  "name": "SS Peter & Paul Bible Quiz",
+  "short_name": "BibleQuiz",
+  "description": "SS Peter & Paul Catholic Church Shomolu — 70th Anniversary Bible Quiz Challenge",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FBF6EC",
+  "theme_color": "#5C3318",
+  "icons": [
+    {
+      "src": "/assets/parish-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/parish-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
