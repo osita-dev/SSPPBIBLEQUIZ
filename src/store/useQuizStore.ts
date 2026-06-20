@@ -3,6 +3,10 @@ import { persist } from "zustand/middleware";
 import type { Question, GamePhase, AnswerState } from "../types/quiz";
 import { getRandomQuestion } from "../data/questions";
 
+const PRIZE_PER_CORRECT = 500;
+const JACKPOT = 8000;
+export const ROUND_LIMIT = 10;
+
 interface QuizState {
   phase: GamePhase;
   currentQuestion: Question | null;
@@ -10,6 +14,7 @@ interface QuizState {
   answerState: AnswerState;
   score: number;
   totalAnswered: number;
+  totalRevealed: number;
   totalSkipped: number;
   prize: number;
   recentIds: number[];
@@ -22,11 +27,9 @@ interface QuizState {
   selectAnswer: (index: number) => void;
   timeExpired: () => void;
   skipQuestion: () => void;
+  playAgain: () => void;
   resetGame: () => void;
 }
-
-const PRIZE_PER_CORRECT = 500;
-const JACKPOT = 8000;
 
 export const useQuizStore = create<QuizState>()(
   persist(
@@ -37,6 +40,7 @@ export const useQuizStore = create<QuizState>()(
       answerState: "idle",
       score: 0,
       totalAnswered: 0,
+      totalRevealed: 0,
       totalSkipped: 0,
       prize: 0,
       recentIds: [],
@@ -56,57 +60,71 @@ export const useQuizStore = create<QuizState>()(
       },
 
       revealQuestion: () => {
-        const { recentIds } = get();
+        const { recentIds, totalRevealed } = get();
+
+        // 10 questions done — round complete, game over
+        if (totalRevealed >= ROUND_LIMIT) {
+          set({ phase: "gameover" });
+          return;
+        }
+
         const q = getRandomQuestion(recentIds);
         const updatedRecent = [...recentIds, q.id];
-        set({ currentQuestion: q, phase: "question", recentIds: updatedRecent });
+        set({
+          currentQuestion: q,
+          phase: "question",
+          recentIds: updatedRecent,
+          totalRevealed: totalRevealed + 1,
+        });
       },
 
       selectAnswer: (index: number) => {
-        const { currentQuestion, score, totalAnswered, prize } = get();
+        const { currentQuestion, score, totalAnswered, prize, totalRevealed } = get();
         if (!currentQuestion || get().answerState !== "idle") return;
 
         const isCorrect = index === currentQuestion.correct;
-        const newPrize = isCorrect ? Math.min(prize + PRIZE_PER_CORRECT, JACKPOT) : prize;
+        const newPrize = isCorrect
+          ? Math.min(prize + PRIZE_PER_CORRECT, JACKPOT)
+          : prize;
+        const newTotalAnswered = totalAnswered + 1;
 
         set({
           selectedOption: index,
           answerState: isCorrect ? "correct" : "wrong",
           score: isCorrect ? score + 1 : score,
-          totalAnswered: totalAnswered + 1,
+          totalAnswered: newTotalAnswered,
           prize: newPrize,
           phase: "feedback",
         });
 
         setTimeout(() => {
-          set({ phase: "idle", currentQuestion: null });
+          if (isCorrect) {
+            // Correct — check if round is complete
+            if (totalRevealed >= ROUND_LIMIT) {
+              set({ phase: "gameover" });
+            } else {
+              set({ phase: "idle", currentQuestion: null });
+            }
+          } else {
+            // Wrong — game over
+            set({ phase: "gameover" });
+          }
         }, 2000);
       },
 
-      // Timer hit zero — auto-select correct answer and reward it
+      // Timer ran out — game over immediately, reveal correct answer
       timeExpired: () => {
-        const { currentQuestion, score, totalAnswered, prize } = get();
+        const { currentQuestion } = get();
         if (!currentQuestion || get().answerState !== "idle") return;
-
-        const newPrize = Math.min(prize + PRIZE_PER_CORRECT, JACKPOT);
 
         set({
           selectedOption: currentQuestion.correct,
-          answerState: "correct",
-          score: score + 1,
-          totalAnswered: totalAnswered + 1,
-          prize: newPrize,
-          phase: "feedback",
+          phase: "gameover",
         });
-
-        setTimeout(() => {
-          set({ phase: "idle", currentQuestion: null });
-        }, 2000);
       },
 
       skipQuestion: () => {
         const { totalSkipped, currentQuestion, recentIds } = get();
-        // add skipped question to blacklist so it doesn't repeat this session
         const updatedRecent = currentQuestion
           ? [...recentIds, currentQuestion.id]
           : recentIds;
@@ -118,6 +136,22 @@ export const useQuizStore = create<QuizState>()(
         });
       },
 
+      playAgain: () => {
+        set({
+          phase: "home",
+          currentQuestion: null,
+          selectedOption: null,
+          answerState: "idle",
+          score: 0,
+          totalAnswered: 0,
+          totalRevealed: 0,
+          totalSkipped: 0,
+          prize: 0,
+          recentIds: [],
+          spinDegrees: 1800,
+        });
+      },
+
       resetGame: () => {
         set({
           phase: "home",
@@ -126,16 +160,16 @@ export const useQuizStore = create<QuizState>()(
           answerState: "idle",
           score: 0,
           totalAnswered: 0,
+          totalRevealed: 0,
           totalSkipped: 0,
           prize: 0,
-          recentIds: [],   // ✅ clears blacklist — all 50 questions available again
+          recentIds: [],
           spinDegrees: 1800,
         });
       },
     }),
     {
-      name: "sspeterpaul-quiz-session", // localStorage key
-      // Only persist state values, not actions
+      name: "sspeterpaul-quiz-session",
       partialize: (state) => ({
         phase: state.phase,
         currentQuestion: state.currentQuestion,
@@ -143,6 +177,7 @@ export const useQuizStore = create<QuizState>()(
         answerState: state.answerState,
         score: state.score,
         totalAnswered: state.totalAnswered,
+        totalRevealed: state.totalRevealed,
         totalSkipped: state.totalSkipped,
         prize: state.prize,
         recentIds: state.recentIds,

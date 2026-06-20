@@ -5,6 +5,7 @@ import SpinWheel from "../components/SpinWheel";
 import QuestionCard from "../components/QuestionCard";
 import ScoreBoard from "../components/ScoreBoard";
 import FeedbackOverlay from "../components/FeedbackOverlay";
+import GameOverScreen from "../components/GameOverScreen";
 import { RotateCcw } from "lucide-react";
 import parishLogo from "../assets/parish-logo.jpeg";
 
@@ -15,18 +16,27 @@ export default function QuizPage() {
   const isSpinning = phase === "spinning";
   const showWheel = phase === "idle" || isSpinning;
   const showQuestion = phase === "question" || phase === "feedback";
+  const isGameOver = phase === "gameover";
 
   return (
     <div className="min-h-screen bg-cream flex flex-col relative overflow-hidden">
       {/* Top bar */}
       <div className="flex items-center justify-between px-4 pt-5 pb-2">
         <div className="flex items-center gap-2">
-          <div className=" w-12 h-12 overflow-hidden border-2 border-gold shrink-0 bg-white">
-            <img src={parishLogo} alt="SS Peter & Paul emblem" className="w-full h-full object-cover" />
+          <div className="rounded-full w-9 h-9 overflow-hidden border-2 border-gold shrink-0 bg-white">
+            <img
+              src={parishLogo}
+              alt="SS Peter & Paul emblem"
+              className="w-full h-full object-cover"
+            />
           </div>
           <div>
-            <p className="font-fredoka text-royal text-base leading-none">SS Peter & Paul Catholic Church Shomolu</p>
-            <p className="text-[10px] text-royal/50 font-bold uppercase tracking-wide">Quiz Challenge</p>
+            <p className="font-fredoka text-royal text-base leading-none">
+              SS Peter & Paul
+            </p>
+            <p className="text-[10px] text-royal/50 font-bold uppercase tracking-wide">
+              Bible Quiz
+            </p>
           </div>
         </div>
         <button
@@ -43,10 +53,9 @@ export default function QuizPage() {
         <ScoreBoard />
       </div>
 
-      {/* Main content area */}
+      {/* Main content */}
       <div className="flex-1 flex flex-col items-center justify-center px-4 pb-8">
         <AnimatePresence mode="wait">
-          {/* WHEEL — tap directly on it to spin (idle) or watch it spin */}
           {showWheel && (
             <motion.div
               key="wheel"
@@ -63,7 +72,6 @@ export default function QuizPage() {
             </motion.div>
           )}
 
-          {/* QUESTION + FEEDBACK */}
           {showQuestion && (
             <motion.div
               key="question"
@@ -79,6 +87,9 @@ export default function QuizPage() {
       </div>
 
       <FeedbackOverlay />
+
+      {/* Game Over — full screen takeover */}
+      {isGameOver && <GameOverScreen />}
     </div>
   );
 }

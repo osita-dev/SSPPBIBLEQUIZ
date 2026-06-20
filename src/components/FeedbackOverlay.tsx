@@ -16,7 +16,9 @@ export default function FeedbackOverlay() {
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className={`rounded-3xl px-10 py-6 text-center shadow-2xl ${correct ? "bg-green-500" : "bg-red-500"}`}
+            className={`rounded-3xl px-10 py-6 text-center shadow-2xl ${
+              correct ? "bg-green-500" : "bg-red-500"
+            }`}
             initial={{ scale: 0.4, rotate: correct ? -10 : 10 }}
             animate={{ scale: 1, rotate: 0 }}
             exit={{ scale: 0.6, opacity: 0 }}
@@ -27,7 +29,14 @@ export default function FeedbackOverlay() {
               {correct ? "Correct!" : "Wrong!"}
             </p>
             {correct && (
-              <p className="font-nunito text-white/90 text-base mt-1 font-semibold">+₦500 earned!</p>
+              <p className="font-nunito text-white/90 text-base mt-1 font-semibold">
+                +₦500 earned!
+              </p>
+            )}
+            {!correct && (
+              <p className="font-nunito text-white/90 text-base mt-1 font-semibold">
+                Game Over incoming...
+              </p>
             )}
           </motion.div>
         </motion.div>
